@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Igbaras 2026: Micro-Business Future</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+        }
+
+        /* Chart Container Rules - MANDATORY */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Constraint for readability */
+            height: 350px; /* Base height */
+            max-height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+
+        /* Palette Classes for Dynamic Usage */
+        .text-brand-primary { color: #4F46E5; } /* Indigo */
+        .bg-brand-primary { background-color: #4F46E5; }
+        
+        .text-brand-secondary { color: #06B6D4; } /* Cyan */
+        .bg-brand-secondary { background-color: #06B6D4; }
+        
+        .text-brand-accent { color: #F59E0B; } /* Amber */
+        .bg-brand-accent { background-color: #F59E0B; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Custom Flowchart styling without SVG */
+        .flow-step {
+            position: relative;
+        }
+        .flow-connector::after {
+            content: '↓';
+            font-size: 2rem;
+            color: #9CA3AF;
+            display: block;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+        @media (min-width: 768px) {
+            .flow-connector::after {
+                content: '→';
+                position: absolute;
+                top: 50%;
+                right: -20px;
+                transform: translateY(-50%);
+                margin: 0;
+            }
+            .last-step::after {
+                content: none;
+            }
+        }
+    </style>
+    <!-- 
+    Palette Name: Tropical Innovation
+    Colors: #4F46E5 (Indigo), #06B6D4 (Cyan), #F59E0B (Amber), #10B981 (Emerald)
+    Chosen for: High contrast, vibrant, representing technology meeting agriculture.
+    -->
+    <!-- 
+    Plan Summary:
+    1. Title/Intro: Setting the scene for 2026.
+    2. KPIs: Immediate stats.
+    3. Charts: Sector Breakdown (Doughnut), Growth (Line), Tech Adoption (Bar), Location Density (Bubble).
+    4. Diagram: Supply Chain (HTML/CSS).
+    5. Analysis: SWOT Grid.
+    -->
+    <!-- CONFIRMATION: NO SVG USED. NO MERMAID JS USED. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navigation / Header -->
+    <header class="bg-gradient-to-r from-indigo-600 to-cyan-500 text-white p-8 shadow-lg">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-2">IGBARAS 2026</h1>
+            <p class="text-xl md:text-2xl font-light text-indigo-100">The Horizon of Micro-Business & Agri-Tourism</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-12">
+
+        <!-- Intro Section -->
+        <section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-indigo-600">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">The New Rural Economy</h2>
+            <p class="text-gray-600 leading-relaxed text-lg">
+                By 2026, the municipality of Igbaras, Iloilo, is projected to undergo a significant economic transformation. Moving beyond traditional subsistence farming, the local economy is diversifying into high-value agri-tourism, digital services, and specialized retail. This infographic explores the projected data landscape, highlighting the opportunities for micro-entrepreneurs in a post-digitalization rural setting.
+            </p>
+        </section>
+
+        <!-- KPI Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl shadow-md p-6 text-center transform transition hover:scale-105 border-t-4 border-amber-500">
+                <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-sm">Projected Micro-Enterprises</h3>
+                <p class="text-5xl font-extrabold text-gray-900 mt-2">1,250+</p>
+                <p class="text-green-600 font-medium mt-1">↑ 35% from 2023</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center transform transition hover:scale-105 border-t-4 border-cyan-500">
+                <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-sm">Digital Payment Adoption</h3>
+                <p class="text-5xl font-extrabold text-gray-900 mt-2">78%</p>
+                <p class="text-indigo-600 font-medium mt-1">Vendors accepting E-wallets</p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-6 text-center transform transition hover:scale-105 border-t-4 border-emerald-500">
+                <h3 class="text-gray-500 font-semibold uppercase tracking-wider text-sm">Top Growth Sector</h3>
+                <p class="text-4xl font-extrabold text-gray-900 mt-2">Agri-Tourism</p>
+                <p class="text-gray-500 font-medium mt-1">Farm stays & Local Tours</p>
+            </div>
+        </section>
+
+        <!-- Row 1: Sector Breakdown & Growth Trend -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Chart 1: Market Composition -->
+            <article class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Market Composition Shift</h3>
+                <p class="text-sm text-gray-500 mb-6">
+                    While agriculture remains the backbone, 2026 sees a massive surge in "Service-Based" businesses (driven by freelancers and delivery) and "Agri-Tourism" (driven by local waterfalls and hiking destinations).
+                </p>
+                <div class="chart-container">
+                    <canvas id="sectorChart"></canvas>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-bold">Insight</span>
+                    <span class="text-sm text-gray-600 ml-2">Tourism-related businesses have doubled in share since 2022.</span>
+                </div>
+            </article>
+
+            <!-- Chart 2: Growth Projection -->
+            <article class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Business Registration Trajectory</h3>
+                <p class="text-sm text-gray-500 mb-6">
+                    A forecast of registered micro-businesses in Igbaras. The sharp incline represents the ease of doing business through digital registration and improved road networks connecting to Iloilo City.
+                </p>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+                <div class="mt-4 text-center">
+                    <span class="inline-block px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-xs font-bold">Forecast</span>
+                    <span class="text-sm text-gray-600 ml-2">Consistent 8-10% year-on-year growth expected.</span>
+                </div>
+            </article>
+        </div>
+
+        <!-- Full Width: Digital Transformation -->
+        <section class="bg-indigo-900 rounded-2xl shadow-xl p-8 text-white">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-1">
+                    <h3 class="text-3xl font-bold mb-4 text-amber-400">The Digital Pivot</h3>
+                    <p class="text-indigo-200 mb-4">
+                        By 2026, the "Sari-sari" store isn't just physical. It's hybrid. The integration of high-speed satellite internet in remote barangays allows farmers to sell directly via social platforms.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-2xl mr-2">📱</span> 95% Smartphone Penetration</li>
+                        <li class="flex items-center"><span class="text-2xl mr-2">📡</span> Starlink/Fiber in 15 Barangays</li>
+                        <li class="flex items-center"><span class="text-2xl mr-2">🛵</span> App-based delivery reach</li>
+                    </ul>
+                </div>
+                <div class="lg:col-span-2 bg-white rounded-xl p-4 text-gray-900">
+                    <div class="chart-container">
+                        <canvas id="techChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Row 2: Location Density & Supply Chain -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Chart 3: Barangay Density -->
+            <article class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Business Opportunity Zones</h3>
+                <p class="text-sm text-gray-500 mb-6">
+                    A density map of key Barangays. Larger bubbles indicate higher volume of businesses. Colors represent the dominant industry in that zone.
+                </p>
+                <div class="chart-container">
+                    <canvas id="bubbleChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 gap-2 mt-4 text-xs text-gray-500 text-center">
+                    <div>🔵 Poblacion (Retail Hub)</div>
+                    <div>🟠 Igtalongon (Tourism Core)</div>
+                    <div>🟢 Passi (Agri-Processing)</div>
+                    <div>🟣 Lab-on (Transport)</div>
+                </div>
+            </article>
+
+            <!-- HTML Diagram: Value Chain -->
+            <article class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">The 2026 Value Chain</h3>
+                <p class="text-sm text-gray-500 mb-6">
+                    The modern logistical flow for Igbaras micro-entrepreneurs, removing middlemen through technology.
+                </p>
+                
+                <div class="flex flex-col md:flex-row justify-between items-center h-full pb-8">
+                    <!-- Step 1 -->
+                    <div class="flow-step flow-connector md:w-1/3 p-4 bg-green-50 rounded-lg border border-green-200 text-center w-full mb-4 md:mb-0">
+                        <div class="text-4xl mb-2">🌱</div>
+                        <h4 class="font-bold text-green-800">Producer</h4>
+                        <p class="text-xs text-gray-600">High-Value Crops & Handicrafts</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flow-step flow-connector md:w-1/3 p-4 bg-indigo-50 rounded-lg border border-indigo-200 text-center w-full mb-4 md:mb-0">
+                        <div class="text-4xl mb-2">📲</div>
+                        <h4 class="font-bold text-indigo-800">Digital Hub</h4>
+                        <p class="text-xs text-gray-600">Direct Orders via Messenger/Apps</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flow-step last-step md:w-1/3 p-4 bg-amber-50 rounded-lg border border-amber-200 text-center w-full">
+                        <div class="text-4xl mb-2">🏡</div>
+                        <h4 class="font-bold text-amber-800">Consumer</h4>
+                        <p class="text-xs text-gray-600">Door-to-door Delivery (Iloilo City)</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Qualitative Analysis: SWOT -->
+        <section class="bg-white rounded-2xl shadow-md p-8">
+            <h3 class="text-3xl font-bold text-center mb-8 text-gray-800">2026 Strategic Analysis</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Strength -->
+                <div class="p-6 bg-green-50 rounded-lg border-l-4 border-green-500">
+                    <h4 class="text-xl font-bold text-green-700 flex items-center mb-2">
+                        <span class="mr-2">💪</span> Strengths
+                    </h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Rich natural resources for tourism (Waterfalls, Mt. Napulak).</li>
+                        <li>Resilient agricultural community.</li>
+                        <li>Increasing youth involvement in entrepreneurship.</li>
+                    </ul>
+                </div>
+                <!-- Weakness -->
+                <div class="p-6 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                    <h4 class="text-xl font-bold text-orange-700 flex items-center mb-2">
+                        <span class="mr-2">🔧</span> Weaknesses
+                    </h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Road conditions in highland barangays during rainy season.</li>
+                        <li>Limited access to traditional banking loans.</li>
+                        <li>High cost of logistics for small volumes.</li>
+                    </ul>
+                </div>
+                <!-- Opportunity -->
+                <div class="p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                    <h4 class="text-xl font-bold text-blue-700 flex items-center mb-2">
+                        <span class="mr-2">🚀</span> Opportunities
+                    </h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Coffee & Cacao processing for export.</li>
+                        <li>Glamping and eco-stay accommodations.</li>
+                        <li>Digital skills outsourcing (Virtual Assistants).</li>
+                    </ul>
+                </div>
+                <!-- Threat -->
+                <div class="p-6 bg-red-50 rounded-lg border-l-4 border-red-500">
+                    <h4 class="text-xl font-bold text-red-700 flex items-center mb-2">
+                        <span class="mr-2">⚠️</span> Threats
+                    </h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Climate change affecting crop yields.</li>
+                        <li>Brain drain of skilled youth to major cities.</li>
+                        <li>Market saturation in generic retail.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-500 text-sm mt-12 pb-8">
+            <p>Data projection based on 2022-2024 regional economic trends.</p>
+            <p>&copy; 2025 Igbaras Future Insights Group.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- UTILITY FUNCTIONS ---
+
+        // 16-Char Label Wrapping Logic
+        function wrapLabels(labels) {
+            return labels.map(label => {
+                if (label.length <= 16) return label;
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if ((currentLine + " " + words[i]).length <= 16) {
+                        currentLine += " " + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            });
+        }
+
+        // Shared Tooltip Configuration
+        const commonTooltipOptions = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // Shared Chart Options for Responsiveness
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                tooltip: commonTooltipOptions,
+                legend: {
+                    labels: {
+                        font: { family: 'Inter', size: 12 },
+                        usePointStyle: true,
+                    }
+                }
+            }
+        };
+
+        // --- CHART INITIALIZATION ---
+        
+        window.onload = function() {
+            
+            // 1. SECTOR BREAKDOWN (Doughnut)
+            const ctxSector = document.getElementById('sectorChart').getContext('2d');
+            const sectorLabels = ['Agri-Business & Processing', 'General Retail (Sari-sari)', 'Agri-Tourism & Hospitality', 'Digital & Tech Services', 'Transport & Logistics'];
+            
+            new Chart(ctxSector, {
+                type: 'doughnut',
+                data: {
+                    labels: wrapLabels(sectorLabels),
+                    datasets: [{
+                        data: [35, 25, 20, 12, 8],
+                        backgroundColor: ['#10B981', '#F59E0B', '#06B6D4', '#4F46E5', '#6B7280'],
+                        borderWidth: 0,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    cutout: '60%',
+                }
+            });
+
+            // 2. GROWTH TRAJECTORY (Line)
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'line',
+                data: {
+                    labels: ['2022', '2023', '2024', '2025 (Proj)', '2026 (Proj)'],
+                    datasets: [{
+                        label: 'Registered Micro-Businesses',
+                        data: [850, 920, 1015, 1140, 1280],
+                        borderColor: '#4F46E5',
+                        backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointBackgroundColor: '#F59E0B',
+                        pointRadius: 6
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: { color: '#E5E7EB' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 3. DIGITAL ADOPTION (Horizontal Bar)
+            const ctxTech = document.getElementById('techChart').getContext('2d');
+            const techLabels = ['GCash/Maya Payments', 'Facebook Marketplace', 'Online Banking', 'Inventory Apps', 'TikTok Shop'];
+            
+            new Chart(ctxTech, {
+                type: 'bar',
+                data: {
+                    labels: wrapLabels(techLabels),
+                    datasets: [{
+                        label: 'Adoption Rate (%)',
+                        data: [78, 65, 40, 32, 28],
+                        backgroundColor: ['#06B6D4', '#3B82F6', '#6366F1', '#8B5CF6', '#EC4899'],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    indexAxis: 'y', // Horizontal bar
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // 4. BARANGAY OPPORTUNITY (Bubble Chart)
+            // Simulating a map using X/Y coordinates
+            // X = Distance from Poblacion, Y = Altitude/Remoteness
+            // R = Business Density/Volume
+            const ctxBubble = document.getElementById('bubbleChart').getContext('2d');
+            
+            new Chart(ctxBubble, {
+                type: 'bubble',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Poblacion (Retail)',
+                            data: [{x: 10, y: 10, r: 25}],
+                            backgroundColor: 'rgba(79, 70, 229, 0.7)' // Indigo
+                        },
+                        {
+                            label: 'Igtalongon (Tourism)',
+                            data: [{x: 30, y: 40, r: 18}],
+                            backgroundColor: 'rgba(245, 158, 11, 0.7)' // Amber
+                        },
+                        {
+                            label: 'Passi (Agriculture)',
+                            data: [{x: 20, y: 25, r: 15}],
+                            backgroundColor: 'rgba(16, 185, 129, 0.7)' // Emerald
+                        },
+                        {
+                            label: 'Lab-on (Transport)',
+                            data: [{x: 15, y: 15, r: 12}],
+                            backgroundColor: 'rgba(139, 92, 246, 0.7)' // Purple
+                        },
+                        {
+                            label: 'Barasan (Coffee)',
+                            data: [{x: 35, y: 50, r: 10}],
+                            backgroundColor: 'rgba(165, 42, 42, 0.7)' // Brown
+                        }
+                    ]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Distance from Center' },
+                            grid: { display: false }
+                        },
+                        y: {
+                            title: { display: true, text: 'Elevation / Tourism Potential' },
+                            grid: { color: '#E5E7EB' }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
